@@ -16,6 +16,14 @@ pipeline {
                 echo 'Description: Run unit tests using Jest or other testing frameworks to ensure the React components and functionality work as expected. Additionally, run integration tests using tools like Cypress or Selenium to test the application as a whole.'
                 echo 'Tools used: Jest, Cypress, or Selenium'
             }
+            post {
+                success {
+                    emailext attachLog: true, body: "Stage 2: Unit and Integration Tests passed successfully.", subject: "Pipeline Notification: Stage 2 Passed", to: "samridh4835.be22@chitkara.edu.in"
+                }
+                failure {
+                    emailext attachLog: true, body: "Stage 2: Unit and Integration Tests failed. Please check the logs for details.", subject: "Pipeline Notification: Stage 2 Failed", to: "samridh4835.be22@chitkara.edu.in"
+                }
+            }
         }
 
         stage('Stage 3: Code Analysis') {
@@ -31,6 +39,14 @@ pipeline {
                 echo 'Stage 4: Security Scan'
                 echo 'Description: Perform a security scan on the React application using tools like OWASP ZAP or other security scanners to identify potential vulnerabilities.'
                 echo 'Tool used: OWASP ZAP or other security scanners'
+            }
+            post {
+                success {
+                    emailext attachLog: true, body: "Stage 4: Security Scan passed successfully.", subject: "Pipeline Notification: Stage 4 Passed", to: "samridh4835.be22@chitkara.edu.in"
+                }
+                failure {
+                    emailext attachLog: true, body: "Stage 4: Security Scan failed. Please check the logs for details.", subject: "Pipeline Notification: Stage 4 Failed", to: "samridh4835.be22@chitkara.edu.in"
+                }
             }
         }
 
